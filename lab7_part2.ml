@@ -34,11 +34,11 @@ There are other source files included in this lab, other than the
 `lab7_partn.ml` files. The file `color.ml` contains an implementation
 of a system for managing colors. (Recall from lab 5 the idea of colors
 as consisting of values for three color channels -- red, green, and
-blue.) Take a look at it to see what functions and values it contains,
-including a type for colors, and a means for converting values for the
-three color channels into the abstract `color` type, extracting the
-channels individually from colors, and converting some standard color
-names to this color representation.
+blue.) Take a look at `color.ml` to see what functions and values it
+contains, including a type for colors, and a means for converting
+values for the three color channels into the abstract `color` type,
+extracting the channels individually from colors, and converting some
+standard color names to this color representation.
 
 With the exception of Exercise 2A, you will need to modify *only*
 the file `color.ml` to complete the exercises below.
@@ -86,8 +86,8 @@ the file `color.ml` to complete the exercises below.
 ........................................................................
 Exercise 2A: Replace the `0` in the expression below with an
 expression that extracts the red channel of the color named `Red`,
-thereby naming the result `red_channel_value`. The expression will be
-constructed from values in the `Color` module.
+naming the result `red_channel_value`. (The expression will be
+constructed using values in the `Color` module.)
 ......................................................................*)
 
 let red_channel_value : int =
