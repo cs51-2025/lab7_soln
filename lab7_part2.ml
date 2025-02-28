@@ -10,7 +10,7 @@
 (* Objective: This lab practices concepts of modules, including files
 as modules, signatures, and polymorphic abstract data types.
 
-There are 4 total parts to this lab. Please refer to the following
+There are three total parts to this lab. Please refer to the following
 files to complete all exercises:
 
    lab7_part1.ml -- Part 1: Implementing modules
@@ -97,7 +97,6 @@ let red_channel_value : int =
 (* Without the local open, we get the slightly more verbose
 
     let red_channel : int =
-      let open Color in
       Color.red_channel (Color.color_named Color.Red) ;;
  *)
 

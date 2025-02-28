@@ -4,12 +4,12 @@
 
                  A module for colors and color names
 
-The representation for colors in this implementation of the signature in
-`color.mli` is really obscure (and arguably unnecessarily so). By the
-way, it also has some bugs so it doesn't pass all the unit tests. No
-need to debug it though, or even read it. You'll be replacing it
-wholesale with your own hopefully simpler implementation. But you'll
-*definitely* want to look over the `color.mli` signature. *)
+The representation for colors in this module is really obscure (and
+arguably unnecessarily so). By the way, it also has some bugs so it
+doesn't pass all the unit tests. No need to debug it though, or even
+read it. You'll be replacing it wholesale with your own hopefully
+simpler implementation, after constructing an appropriate signature
+for the module in the file `color.mli`. *)
 
 (*
                                SOLUTION
@@ -23,14 +23,14 @@ You might have used a record type instead of a tuple, for instance,
     type color = { red : int; green : int; blue : int } ;;
 
 That could work too. And the user of the module (the file
-`lab7_part2.ml`) *wouldn't be able to tell the difference*, just like it
-can't tell the difference with the horribly obfuscated implementation in
-the original version of `color.ml`.
+`lab7_part2.ml`) *wouldn't be able to tell the difference*, just like
+it can't tell the difference with the horribly obfuscated
+implementation in the original version of `color.ml`.
 
 You'll notice that we've moved all of the documentation on module
 elements (types, functions, and the like) into the `.mli` file, since
-it's the signature file that codifies what users of the module "need to
-know". *)
+it's the signature file that codifies what users of the module "need
+to know". *)
 
 type color = int * int * int ;;
 

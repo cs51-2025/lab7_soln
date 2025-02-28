@@ -10,7 +10,7 @@
 (* Objective: This lab practices concepts of modules, including files
 as modules, signatures, and polymorphic abstract data types.
 
-There are 4 total parts to this lab. Please refer to the following
+There are three total parts to this lab. Please refer to the following
 files to complete all exercises:
 
 -> lab7_part1.ml -- Part 1: Implementing modules (this file)
@@ -54,16 +54,16 @@ module type WEATHER = sig
   val precipitation_amount : condition -> int
 end ;;
 
-(* Notice that we've left out the function `season_to_string`, since
-it was really just a helper function for `describe_weather`. There's
-no reason that users of the module should need to use this
-function. *)
+(* Notice that we've left out the function `season_to_string` from the
+signature, since it was really just a helper function for
+`describe_weather`. There's no reason that users of the module should
+need to use this function. *)
 
 (*......................................................................
 Exercise 1A: Complete the implementation of a module called `Weather`
 that satisfies the signature above. Feel free to make use of your
-solution or the staff solution for lab 6 part 1. *)
-(*....................................................................*)
+solution or the staff solution for lab 6 part 1.
+......................................................................*)
 
 module Weather : WEATHER = struct
   type season = Spring | Summer | Autumn | Winter
@@ -77,13 +77,15 @@ module Weather : WEATHER = struct
                           
   (* We still make use of the `season_to_string` helper function. It
      won't be exposed in the interface. *)
-  let season_to_string = function
+  let season_to_string (season : season) : string =
+    match season with
     | Spring -> "spring"
     | Summer -> "summer"
     | Autumn -> "autumn"
     | Winter -> "winter"
-                  
-  let precipitation_amount = function
+
+  let precipitation_amount (condition : condition) : int =
+    match condition with
     | Sunny -> 0
     | Rainy amount | Snowy amount -> amount
                                        
@@ -98,24 +100,6 @@ module Weather : WEATHER = struct
     | Rainy _ -> "It's raining" ^ common_str
     | Snowy _ -> "It's snowing" ^ common_str
 end ;;
-
-(* By the way, in the definitions of `season_to_string` and
-   `precipitation_amount`, we've taken advantage of an alternative
-   syntax for defining functions, using the `function` keyword instead
-   of `fun`. This syntax allows for specifying one or more match
-   patterns directly in the function's argument. Thus, instead of
-
-        let precipitation_amount (condition : condition) : int = 
-          match condition with
-          | Sunny -> 0
-          | Rainy amount | Snowy amount -> amount
-
-   we have the slightly more elegant
-
-        let precipitation_amount : condition -> int = function
-          | Sunny -> 0
-          | Rainy amount | Snowy amount -> amount
-   *)
 
 (*......................................................................
 Exercise 1B: Now that you've implemented the `Weather` module, use it
@@ -134,6 +118,14 @@ let example =
     {Weather.season = Weather.Winter;
      Weather.condition = Weather.Rainy 20}  ;;
 
+(* You may find that, strictly speaking, the `Weather.` module
+   qualifiers are not needed on the field names (like `season`) and
+   value constructors (like `Sunny`). That's because OCaml may manage
+   to infer which `season` or `Sunny` you may be referring to. But
+   OCaml can't always reconstruct them, so we've included them for
+   explicitness, and to highlight the contrast in the next
+   exercise. *)
+
 (*......................................................................
 Exercise 1C: Reimplement `example` from 1B above, now as
 `example_local_open`, but using a "local open" to write your
@@ -143,5 +135,3 @@ computation in a more succinct manner.
 let example_local_open =
   let open Weather in
   describe_weather {season = Winter; condition = Rainy 20} ;;
-
-(* Isn't the version with the local open more readable?! *)
