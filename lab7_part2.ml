@@ -114,6 +114,12 @@ Exercise 2B: Add a file `color.mli`, in which you define an appropriate
 signature for the `Color` module. Consider which types and values you
 want revealed to the user and which you would prefer to be hidden.
 
+    HINT: You'll want users of the module to know that there is a
+    `color` type, but not how it's implemented. You'll want users of
+    the module to know that there is a `color_name` type, and also
+    what its enumerated constructors are, so that users can invoke
+    those colors.
+
 Once you have `color.mli` implemented, you should still be able to
 compile `color.ml` and run `color.byte`.
 ......................................................................*)
